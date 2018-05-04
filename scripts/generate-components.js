@@ -1,6 +1,7 @@
-const { lstatSync, readdirSync, readFileSync } = require('fs');
+const { mkdirSync, lstatSync, readdirSync, readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
 const pascalCase = require('pascal-case');
+const kebabCase = require('kebab-case');
 
 const isDirectory = source => lstatSync(source).isDirectory();
 const getDirectories = source => readdirSync(source).map(name => join(source, name)).filter(isDirectory);
@@ -20,16 +21,29 @@ const getDirectories = source => readdirSync(source).map(name => join(source, na
 	});
 
 	const components = icons.map(icon => {
-		return `
-import React from 'react';
+		const componentName = icon.iconName.replace('SrcIcons', '');
+		return {
+			name: componentName,
+			code: `import React from 'react';
 
-export default function ${icon.iconName.replace('SrcIcons', '')}() {
+export default function ${componentName}() {
 	return (
-		<span />
+		<span>
+			${icon.i !== '' ? `<span></span>` : ''}
+		</span>
 	);
 }
-		`;
+		`
+		};
 	});
 
-	console.log(components);
+	const isLibFolderCreated = readdirSync('.').find(dir => dir === 'lib');
+
+	if (!isLibFolderCreated) {
+		mkdirSync('./lib');
+	}
+
+	components.forEach(component => {
+		writeFileSync(`lib/${kebabCase(component.name).slice(1)}.jsx`, component.code);
+	});
 })();
