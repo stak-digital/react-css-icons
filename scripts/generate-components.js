@@ -1,5 +1,6 @@
 const { mkdirSync, lstatSync, readdirSync, readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
+const convertStyles = require('./convert-styles');
 const pascalCase = require('pascal-case');
 const kebabCase = require('kebab-case');
 
@@ -28,7 +29,7 @@ const getDirectories = source => readdirSync(source).map(name => join(source, na
 
 export default function ${componentName}() {
 	return (
-		<span>
+		<span style={${JSON.stringify(convertStyles(icon.main))}}>
 			${icon.i !== '' ? `<span></span>` : ''}
 		</span>
 	);
