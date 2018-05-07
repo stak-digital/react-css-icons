@@ -30,11 +30,11 @@ const getDirectories = source => readdirSync(source).map(name => join(source, na
 export default function ${componentName}() {
 	return (
 		<span style={${JSON.stringify(convertStyles(icon.main))}}>
-			${icon.before !== '' ? `<span style={${JSON.stringify(convertStyles(icon.before))}/>` : ''}
-			${icon.after !== '' ? `<span style={${JSON.stringify(convertStyles(icon.after))}/>` : ''}
+			${icon.before !== '' ? `<span style={${JSON.stringify(convertStyles(icon.before))}}/>` : ''}
+			${icon.after !== '' ? `<span style={${JSON.stringify(convertStyles(icon.after))}}/>` : ''}
 			${icon.i !== '' ? `<span>
-				${icon.iAfter !== '' ? `<span style={${JSON.stringify(convertStyles(icon.iAfter))}/>` : ''}
-				${icon.iBefore !== '' ? `<span style={${JSON.stringify(convertStyles(icon.iBefore))}/>` : ''}
+				${icon.iAfter !== '' ? `<span style={${JSON.stringify(convertStyles(icon.iAfter))}}/>` : ''}
+				${icon.iBefore !== '' ? `<span style={${JSON.stringify(convertStyles(icon.iBefore))}}/>` : ''}
 			</span>` : ''}
 		</span>
 	);

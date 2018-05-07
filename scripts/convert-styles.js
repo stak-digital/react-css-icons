@@ -10,6 +10,10 @@ function cssLine2ReactJsInlineStyle(acc, line) {
 	const key = camelCase(parts[0]);
 	let value = parts[1];
 
+	if (key.includes('content')) {
+		return acc;
+	}
+
 	if (value === '@light') {
 		value = 'weight.light';
 	} else if (value === '@regular') {
@@ -17,7 +21,7 @@ function cssLine2ReactJsInlineStyle(acc, line) {
 	} else if (value === '@medium') {
 		value = 'weight.medium';
 	} else if (isNaN(Number(value))) {
-		value = quote(jsStringEscape(value));
+		value = jsStringEscape(value);
 	}
 
 	return {
