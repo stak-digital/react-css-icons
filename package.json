@@ -13,5 +13,15 @@
     "lodash": "^4.17.10",
     "pascal-case": "^2.0.1",
     "quote": "^0.4.0"
+  },
+  "scripts": {
+    "start": "node ./scripts/generate-components.js",
+    "demo": "parcel build ./docs/index.html",
+    "demo:watch": "parcel ./docs/index.html"
+  },
+  "dependencies": {
+    "parcel-bundler": "^1.8.1",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
   }
 }
