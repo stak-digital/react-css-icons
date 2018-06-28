@@ -16,8 +16,8 @@
   },
   "scripts": {
     "start": "node ./scripts/generate-components.js",
-    "demo": "parcel build ./docs/index.html",
-    "demo:watch": "parcel ./docs/index.html"
+    "demo": "parcel build ./docs/src/index.html --out-dir docs",
+    "demo:watch": "parcel ./docs/src/index.html"
   },
   "dependencies": {
     "clipboard-copy": "^2.0.0",

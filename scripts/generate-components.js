@@ -58,11 +58,11 @@ export default function ${componentName}() {
 		writeFileSync(`lib/${kebabCase(component.name).slice(1)}.jsx`, component.code);
 	});
 
-	writeFileSync('docs/data.json', JSON.stringify(components, null, '\t'));
+	writeFileSync('docs/src/data.json', JSON.stringify(components, null, '\t'));
 
 	const exportedComponents = `
 ${components.reduce((acc, curr) => {
-	return `${acc}\nimport ${curr.importName} from '../lib/${curr.fileName}'`;	
+	return `${acc}\nimport ${curr.importName} from '../../lib/${curr.fileName}'`;	
 }, '')}
 		
 export default {
@@ -71,5 +71,5 @@ export default {
 	}, '')}
 };`;
 
-	writeFileSync('docs/components.jsx', exportedComponents);
+	writeFileSync('docs/src/components.jsx', exportedComponents);
 })();
