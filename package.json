@@ -20,6 +20,7 @@
     "demo:watch": "parcel ./docs/index.html"
   },
   "dependencies": {
+    "clipboard-copy": "^2.0.0",
     "parcel-bundler": "^1.8.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2"

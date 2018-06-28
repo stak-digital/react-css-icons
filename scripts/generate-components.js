@@ -23,6 +23,8 @@ const getDirectories = source => readdirSync(source).map(name => join(source, na
 
 	const components = icons.map(icon => {
 		const componentName = icon.iconName.replace('SrcIcons', '');
+		const componentFileName = `${kebabCase(componentName).slice(1)}.jsx`;
+
 		return {
 			name: componentName,
 			code: `import React from 'react';
@@ -39,7 +41,10 @@ export default function ${componentName}() {
 		</span>
 	);
 }
-		`
+		`,
+			fileName: componentFileName,
+			importName: `${componentName}Icon`,
+			importCode: `import ${componentName}Icon from 'react-css-icons/lib/${componentFileName}'`,
 		};
 	});
 
@@ -52,4 +57,19 @@ export default function ${componentName}() {
 	components.forEach(component => {
 		writeFileSync(`lib/${kebabCase(component.name).slice(1)}.jsx`, component.code);
 	});
+
+	writeFileSync('docs/data.json', JSON.stringify(components, null, '\t'));
+
+	const exportedComponents = `
+${components.reduce((acc, curr) => {
+	return `${acc}\nimport ${curr.importName} from '../lib/${curr.fileName}'`;	
+}, '')}
+		
+export default {
+	${components.reduce((acc, curr) => {
+		return `${acc}\n\t${curr.importName},`;	
+	}, '')}
+};`;
+
+	writeFileSync('docs/components.jsx', exportedComponents);
 })();
