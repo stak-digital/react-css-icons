@@ -16,7 +16,6 @@ class App extends React.Component {
 				</p>
 				{componentData.map(component => {
 					return <span key={component.name} onClick={() => {
-						console.log(component.importCode);
 						copy(component.importCode);
 					}} style={{cursor: 'pointer', width: 20, height: 20}}>
 					{Components[component.importName]()}

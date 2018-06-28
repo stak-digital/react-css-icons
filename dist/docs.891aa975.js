@@ -25841,7 +25841,6 @@ var App = function (_React$Component) {
 					return _react2.default.createElement(
 						'span',
 						{ key: component.name, onClick: function onClick() {
-								console.log(component.importCode);
 								(0, _clipboardCopy2.default)(component.importCode);
 							}, style: { cursor: 'pointer', width: 20, height: 20 } },
 						_components2.default[component.importName]()
